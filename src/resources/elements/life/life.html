@@ -1,10 +1,13 @@
 <template>
+	<require from="resources/elements/canvas/canvas"></require>
 	<require from="./life.css"></require>
 	<canvas id="life"
-			width="750"
-			height="464"
+			width.bind="canvasWidth"
+			height.bind="canvasHeight"
+			cell-size.bind="cellSize"
 			click.delegate="addCell($event)"
 			mouseenter.trigger="slowDown()"
 			mouseleave.trigger="fullSpeed()">
 	</canvas>
+
 </template>
