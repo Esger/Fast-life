@@ -1,58 +1,52 @@
 import {
-    inject
+	inject
 } from 'aurelia-framework';
 import {
-    EventAggregator
+	EventAggregator
 } from 'aurelia-event-aggregator';
 
 @inject(EventAggregator)
 export class ControlsCustomElement {
 
-    constructor(eventAggregator) {
-        this.ea = eventAggregator;
-        this.startPulsor = true;
-        this.clearPulsor = false;
-        this.timeOut = 0;
-        this.addListeners();
-    }
+	constructor(eventAggregator) {
+		this._eventAggregator = eventAggregator;
+		this.clearPulsor = false;
+		this.stopPulsor = false;
+		this.startPulsor = true;
+		this.randomPulsor = false;
+		this.timeOut = 0;
+	}
 
-    clear() {
-        this.ea.publish('clear');
-        this.clearPulsor = false;
-        this.startPulsor = true;
-    }
+	clear() {
+		this._eventAggregator.publish('clear');
+		this.clearPulsor = false;
+		this.stopPulsor = false;
+		this.randomPulsor = true;
+	}
 
-    stop() {
-        this.ea.publish('stop');
-    }
+	stop() {
+		this._eventAggregator.publish('stop');
+		this.stopPulsor = false;
+		this.clearPulsor = true;
+	}
 
-    step() {
-        this.ea.publish('step');
-        this.startPulsor = false;
-    }
+	step() {
+		this._eventAggregator.publish('step');
+	}
 
-    start() {
-        this.ea.publish('start');
-        this.startPulsor = false;
-    }
+	start() {
+		this._eventAggregator.publish('start');
+		this.startPulsor = false;
+		this.stopPulsor = true;
+	}
 
-    startNstop() {
-        this.ea.publish('startNstop');
-        this.startPulsor = false;
-    }
+	fillRandom() {
+		this._eventAggregator.publish('fillRandom');
+		this.randomPulsor = false;
+		this.startPulsor = true;
+	}
 
-    fillRandom() {
-        this.ea.publish('fillRandom');
-    }
-
-    setTimeoutInterval() {
-        this.ea.publish('timeoutInterval', this.timeOut);
-    }
-
-    addListeners() {
-        this.ea.subscribe('cellSize', response => {
-            this.clearPulsor = true;
-        });
-    }
-
+	setTimeoutInterval() {
+		this._eventAggregator.publish('timeoutInterval', this.timeOut);
+	}
 }
