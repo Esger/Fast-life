@@ -28,8 +28,7 @@
                max.one-time="200"
                step="20"
                value.bind="timeOut"
-               change.delegate="setTimeoutInterval()">
-		<output value.bind="'interval: ' + timeOut"></output>
+               change.delegate="setTimeoutInterval()"> <output value="interval: ${timeOut}"></output>
 
 	</life-controls>
 	<stats></stats>
