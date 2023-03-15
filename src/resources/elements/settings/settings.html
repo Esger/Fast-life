@@ -52,14 +52,15 @@
 		</row-labels>
 		<life-rules>
 			<input type="range"
-					class="cellSize"
+				   class="cellSize"
                    title="cell size ${cellSize}"
                    min.one-time="minCellSize"
                    max.one-time="maxCellSize"
                    value.bind="cellSizeExp"
                    change.delegate="setCellSize()"
                    focus.delegate="stop()">
-			<output value.bind="cellSize"></output>
+			<output value.bind="cellSize"
+					class="cellSize"></output>
 			<input id="trails"
                    type="checkbox"
                    checked.bind="trails"
